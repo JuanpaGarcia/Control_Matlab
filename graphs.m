@@ -1,6 +1,6 @@
 %%
 %importar datos de un txt, obtenido de terminal serial
-a = importdata('motor_10_v_sin_3hz.txt');
+a = importdata('motor_10v.txt');
 v = a;
 min = a(1,2);
 for i=1 : length(a)
@@ -23,3 +23,17 @@ end
 %%
 plot(y,new_x);
 
+%%
+%FDT
+
+churrito = -50;
+wn = -802;
+k = 0.11;
+
+sys = tf([k*wn^2],[1,2*churrito*wn, wn^2])
+
+t = (0:0.01:1)';
+y = sin(2*pi*10*t)+1;
+%plot(t,y)
+
+lsim(sys, y, t);
